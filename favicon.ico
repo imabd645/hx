@@ -1,0 +1,12 @@
+<!-- This is a placeholder favicon. In a real project, you would use an actual .ico file -->
+<!-- For demonstration purposes, we'll create a simple HTML file that can be converted to favicon -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Placeholder</title>
+</head>
+<body>
+    <p>This is a placeholder for favicon.ico file.</p>
+    <p>In production, replace this with an actual .ico file.</p>
+</body>
+</html>
