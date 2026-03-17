@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MaazX Website Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>MaazX Website Deployment Test</h1>
+    <p>Testing GitHub Pages deployment...</p>
+    
+    <div id="test-results">
+        <h2>Test Results:</h2>
+        <p id="status">Running tests...</p>
+    </div>
+    
+    <script>
+        const tests = [
+            { name: 'GitHub Pages URL accessible', url: 'https://imabd645.github.io/hx/' },
+            { name: 'Main page loads', url: 'https://imabd645.github.io/hx/index.html' },
+            { name: 'CSS file loads', url: 'https://imabd645.github.io/hx/css/style.css' },
+            { name: 'JS file loads', url: 'https://imabd645.github.io/hx/js/script.js' }
+        ];
+        
+        async function runTests() {
+            const results = document.getElementById('test-results');
+            let allPassed = true;
+            
+            for (const test of tests) {
+                const testElement = document.createElement('p');
+                testElement.id = `test-${test.name.replace(/\s+/g, '-')}`;
+                
+                try {
+                    const response = await fetch(test.url, { method: 'HEAD' });
+                    if (response.ok) {
+                        testElement.innerHTML = `<span class="success">✓</span> ${test.name}: PASS`;
+                        testElement.className = 'success';
+                    } else {
+                        testElement.innerHTML = `<span class="error">✗</span> ${test.name}: FAIL (${response.status})`;
+                        testElement.className = 'error';
+                        allPassed = false;
+                    }
+                } catch (error) {
+                    testElement.innerHTML = `<span class="error">✗</span> ${test.name}: ERROR (${error.message})`;
+                    testElement.className = 'error';
+                    allPassed = false;
+                }
+                
+                results.appendChild(testElement);
+            }
+            
+            const status = document.getElementById('status');
+            if (allPassed) {
+                status.innerHTML = '<span class="success">✅ All tests passed! Website is live and working.</span>';
+                status.className = 'success';
+            } else {
+                status.innerHTML = '<span class="error">❌ Some tests failed. Check the results above.</span>';
+                status.className = 'error';
+            }
+        }
+        
+        runTests();
+    </script>
+</body>
+</html>
